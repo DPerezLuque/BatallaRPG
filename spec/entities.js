@@ -44,7 +44,7 @@ describe('Entities library', function () {
     expect(Effect).toEqual(jasmine.any(Function));
   });
 
-  xdescribe('Effect type', function () {
+  describe('Effect type', function () {
 
     it('allows specify arbitrary feature alterations.', function () {
       var effect = new Effect({
@@ -57,7 +57,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Character type', function () {
+  describe('Character type', function () {
     var features = {
       initiative: 15,
       defense: 55,
@@ -87,7 +87,7 @@ describe('Entities library', function () {
       expect(character.maxHp).toBe(15);
     });
 
-    it('allows to create characters with specific features.', function () {
+   it('allows to create characters with specific features.', function () {
       expect(character).toEqual(jasmine.objectContaining(features));
     });
 
@@ -242,7 +242,7 @@ describe('Entities library', function () {
 
   });
 
-  describe('Scroll type', function () {
+  xdescribe('Scroll type', function () {
 
     it('is a subtype of Item', function () {
       expect(Scroll.prototype).toEqual(jasmine.any(Item));
@@ -263,7 +263,7 @@ describe('Entities library', function () {
 
   });
 
-  describe('Built-in entities', function () {
+  xdescribe('Built-in entities', function () {
 
     it('includes characters and weapons.', function () {
       expect(entities.characters).toEqual(jasmine.any(Object));
