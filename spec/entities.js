@@ -210,7 +210,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Item type', function () {
+  describe('Item type', function () {
 
     it('allows to create generic items', function () {
       var item = new Item('testItem', new Effect({ hp: 5 }));
@@ -220,7 +220,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Weapon type', function () {
+  describe('Weapon type', function () {
 
     it('is a subtype of Item', function () {
       expect(Weapon.prototype).toEqual(jasmine.any(Item));
@@ -242,7 +242,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Scroll type', function () {
+  describe('Scroll type', function () {
 
     it('is a subtype of Item', function () {
       expect(Scroll.prototype).toEqual(jasmine.any(Item));
@@ -255,7 +255,7 @@ describe('Entities library', function () {
       expect(health.effect).toEqual(jasmine.any(Effect));
     });
 
-    xit('can test if a character can pay its cost.', function () {
+    it('can test if a character can pay its cost.', function () {
       var health = new Scroll('health', 5, new Effect({ hp: 5 }));
       expect(health.canBeUsed(10)).toBe(true);
       expect(health.canBeUsed(4)).toBe(false);
