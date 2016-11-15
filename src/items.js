@@ -24,11 +24,11 @@ function Weapon(name, damage, extraEffect) {
   Weapon.prototype.constructor = Weapon;
 
 function Scroll(name, cost, effect) {
- 
+   Item.call(this, name, effect);
   this.cost = cost;
   effect = effect || new Effect ({});
-  /*var canBeUsed = Scroll.prototype.canBeUsed ()
-  if (canBeUsed) Item.call(this, name, effect);*/
+  var canBeUsed = Scroll.prototype.canBeUsed ()
+  if (canBeUsed) Item.apply(this, [name, effect]);
 }
 
 Scroll.prototype = Object.create(Item.prototype);
@@ -50,8 +50,13 @@ function Effect(variations) {
     this[name] = variations[name];
   }
 */
+this.initiative = variations.initiative || 0;
+this.defense = variations.defense || 0;
 this.hp = variations.hp || 0;
 this.mp = variations.mp || 0;
+this.maxMp = variations.maxMp || 0;
+this.maxHp = variations.maxHp || 0;
+
 }
 
 module.exports = {

@@ -20,6 +20,12 @@ TurnList.prototype.next = function () {
 TurnList.prototype._sortByInitiative = function () {
   // Utiliza la función Array.sort(). ¡No te implementes tu propia
   // función de ordenación!
+  var initiatives = [];
+  for (var initiative in this.charactersById)
+    initiatives.push (this._charactersById.initiatives);
+
+initiatives.sort ();
+return initiatives;
 };
 
 module.exports = TurnList;

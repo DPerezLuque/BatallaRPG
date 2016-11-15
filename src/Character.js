@@ -10,7 +10,7 @@ function Character(name, features) {
   this.party = null;
   this.initiative = features.initiative || 0;
   this.defense = features.defense || 0;
-  this.weapon =  null;
+  this.weapon =  features.weapon ||null;
 
   this._mp = features.mp || 0;
   this._hp = features.hp || 0;
@@ -36,7 +36,7 @@ Character.prototype.applyEffect = function (effect, isAlly) {
   //Si es un aliado, ignora la comprobacion de armadura. Si es un enemigo, 
   //el número aleatorio deberá superar la armadura para que se aplique el efecto que recibe.
     if (isAlly || rnd > this.defense){
-
+//Poner variations en vez de 5 ???
       this.initiative -=5;
       this.defense += 5;
       this._hp -=5;
