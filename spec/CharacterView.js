@@ -1,6 +1,6 @@
 var samples = require('./samplelib');
 
-xdescribe('CharactesView type', function () {
+describe('CharactesView type', function () {
   'use strict';
 
   var CharactersView = require('../src/CharactersView');
@@ -44,7 +44,7 @@ xdescribe('CharactesView type', function () {
     });
   });
 
-  it('list all characters.', function () {
+  xit('list all characters.', function () {
     var heroTankView = charactersView.get('Tank');
     var heroWizardView = charactersView.get('Wizz');
     expect(charactersView.all())
@@ -54,7 +54,7 @@ xdescribe('CharactesView type', function () {
       });
   });
 
-  it('list all characters by party', function () {
+  xit('list all characters by party', function () {
     var heroTankView = charactersView.get('Tank');
     var heroWizardView = charactersView.get('Wizz');
     expect(charactersView.allFrom('teamA'))
@@ -67,7 +67,7 @@ xdescribe('CharactesView type', function () {
       });
   });
 
-  it('does not allow to modify character\'s features', function () {
+  xit('does not allow to modify character\'s features', function () {
     var heroTankView = charactersView.get('Tank');
 
     visibleFeatures.forEach(function (feature) {
@@ -77,7 +77,7 @@ xdescribe('CharactesView type', function () {
     });
   });
 
-  it('does not modify the original character.', function () {
+  xit('does not modify the original character.', function () {
     var heroTankView = charactersView.get('Tank');
 
     var expectedValues = visibleFeatures.reduce(function (values, feature) {

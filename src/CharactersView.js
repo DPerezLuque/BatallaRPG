@@ -50,6 +50,7 @@ CharactersView.prototype._getViewFor = function (character) {
   Object.defineProperty(view, 'cada feature', {
     get: function () {
       // ¿Cómo sería este getter para reflejar la propiedad del personaje?
+      
     },
     set: function (value) {
       // ¿Y este setter para ignorar cualquier acción?
