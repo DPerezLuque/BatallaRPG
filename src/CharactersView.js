@@ -47,74 +47,20 @@ CharactersView.prototype._getViewFor = function (character) {
   // Usa la lista de características visibles y Object.defineProperty() para
   // devolver un objeto de JavaScript con las características visibles pero
   // no modificables.
-  Object.defineProperty(view, 'name', {
+  this._visibleFeatures.forEach( function (feature){
+  Object.defineProperty(view, feature, {
     get: function () {
       // ¿Cómo sería este getter para reflejar la propiedad del personaje?
-      
+      return character [feature];
     },
     set: function (value) {
       // ¿Y este setter para ignorar cualquier acción?
     },
     enumerable: true
   });
-
-   Object.defineProperty(view, 'party', {
-    get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
-      
-    },
-    set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
-    },
-    enumerable: true
-  });
-
-    Object.defineProperty(view, 'initiative', {
-    get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
-      
-    },
-    set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
-    },
-    enumerable: true
-  });
-
- Object.defineProperty(view, 'defense', {
-    get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
-      
-    },
-    set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
-    },
-    enumerable: true
-  });
-
-  Object.defineProperty(view, 'maxHp', {
-    get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
-      
-    },
-    set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
-    },
-    enumerable: true
-  });
-
- Object.defineProperty(view, 'maxMp', {
-    get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
-      
-    },
-    set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
-    },
-    enumerable: true
-  });
-
-
+});
   // Acuérdate de devolver el objeto.
+  return view;
 };
 
 module.exports = CharactersView;

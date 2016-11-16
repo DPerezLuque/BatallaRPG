@@ -44,7 +44,7 @@ describe('CharactesView type', function () {
     });
   });
 
-  xit('list all characters.', function () {
+  it('list all characters.', function () {
     var heroTankView = charactersView.get('Tank');
     var heroWizardView = charactersView.get('Wizz');
     expect(charactersView.all())
@@ -54,7 +54,7 @@ describe('CharactesView type', function () {
       });
   });
 
-  xit('list all characters by party', function () {
+  it('list all characters by party', function () {
     var heroTankView = charactersView.get('Tank');
     var heroWizardView = charactersView.get('Wizz');
     expect(charactersView.allFrom('teamA'))
@@ -67,7 +67,7 @@ describe('CharactesView type', function () {
       });
   });
 
-  xit('does not allow to modify character\'s features', function () {
+  it('does not allow to modify character\'s features', function () {
     var heroTankView = charactersView.get('Tank');
 
     visibleFeatures.forEach(function (feature) {
@@ -77,7 +77,7 @@ describe('CharactesView type', function () {
     });
   });
 
-  xit('does not modify the original character.', function () {
+  it('does not modify the original character.', function () {
     var heroTankView = charactersView.get('Tank');
 
     var expectedValues = visibleFeatures.reduce(function (values, feature) {
