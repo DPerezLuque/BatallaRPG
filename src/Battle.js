@@ -82,13 +82,30 @@ Battle.prototype._extractCharactersById = function (parties) {
 
   function assignParty(characters, party) {
     // Cambia la party de todos los personajes a la pasada como parámetro.
+    for (var person in characters){
+      characters[person].party = party;
+    }
   }
 
   function useUniqueName(character) {
     // Genera nombres únicos de acuerdo a las reglas
     // de generación de identificadores que encontrarás en
     // la descripción de la práctica o en la especificación.
-  }
+   
+   //El histogranma de nombres está en idCounters
+   if (!idCounters.hasOwnProperty(character.name)) {
+      idCounters[character.name] = 1;
+      console.log (character.name);
+      return (character.name);
+    }
+    else{
+
+      idCounters[character.name]++;
+      console.log (character.name + ' ' + (idCounters[character.name]));
+      return (character.name + ' ' + (idCounters[character.name]));
+    } 
+  } 
+
 };
 
 Battle.prototype._resetStates = function (charactersById) {
@@ -133,6 +150,7 @@ Battle.prototype._checkEndOfBattle = function () {
 
   function isAlive(character) {
     // Devuelve true si el personaje está vivo.
+    return (character.hp > 0);
   }
 
   function getCommonParty(characters) {
@@ -170,6 +188,9 @@ Battle.prototype._defend = function () {
 Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];
   // Implementa la mejora de la defensa del personaje.
+  //var currentDefense = fastEnemy.defense;
+  var expectedDefense = Math.ceil(states.defense * 1.1);
+  return expectedDefense;
 };
 
 Battle.prototype._restoreDefense = function (targetId) {

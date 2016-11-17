@@ -1,6 +1,6 @@
 var mockery = require('mockery');
 
-xdescribe('Battle type', function () {
+describe('Battle type', function () {
   'use strict';
 
   var Battle;
@@ -68,7 +68,7 @@ xdescribe('Battle type', function () {
     battle.stop();
   });
 
-  xdescribe('Battle API', function () {
+  describe('Battle API', function () {
 
     it('is completely defined.', function () {
       expect(battle).toEqual(jasmine.any(EventEmitter));
@@ -78,7 +78,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Turn list', function () {
+  describe('Turn list', function () {
 
     it('includes all the characters sorted by initiative.', function (done) {
       var sortedByInitiative = ['Fasty', 'Tank', 'Wizz'];
@@ -93,7 +93,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Start', function () {
+  describe('Start', function () {
 
     it('includes the characters who are going to fight by party.',
     function (done) {
@@ -110,7 +110,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Turns', function () {
+  describe('Turns', function () {
 
     it('include relevant info.', function (done) {
       battle.on('turn', function (turn) {
@@ -123,7 +123,7 @@ xdescribe('Battle type', function () {
       battle.start();
     });
 
-    it('ignore dead characters.', function (done) {
+   it('ignore dead characters.', function (done) {
       fastEnemy.hp = 0;
       currentSetup.monsters.members.push(characters.fastEnemy);
       battle.setup(currentSetup);
@@ -140,7 +140,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Parties in battle', function () {
+  describe('Parties in battle', function () {
 
     it('can contain repeated members, each will be assigned a different id.',
     function () {
@@ -189,7 +189,7 @@ xdescribe('Battle type', function () {
         battle.start();
       });
 
-      it('increases defense feature by 10%.', function (done) {
+      xit('increases defense feature by 10%.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -209,7 +209,7 @@ xdescribe('Battle type', function () {
         battle.start();
       });
 
-      it('increases the odds of defending against attack.', function (done) {
+      xit('increases the odds of defending against attack.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -234,7 +234,7 @@ xdescribe('Battle type', function () {
         battle.start();
       });
 
-      it('increases the odds of defending against cast.', function (done) {
+      xit('increases the odds of defending against cast.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -263,7 +263,7 @@ xdescribe('Battle type', function () {
         battle.start();
       });
 
-      it('accumulates turn by turn.', function (done) {
+      xit('accumulates turn by turn.', function (done) {
         var currentDefense = fastEnemy.defense;
         var expectedDefense =
             Math.ceil(Math.ceil(currentDefense * 1.1) * 1.1);
