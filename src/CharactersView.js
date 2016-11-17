@@ -42,24 +42,28 @@ CharactersView.prototype.set = function (characters) {
   }.bind(this), {});
 };
 
+//Este método toma la lista de características visibles, y no modificables, 
+//Y devuelve un objeto con todas esas variables. 
+//Se trata de un bucle for each, que recorre cada una de las "features" y las asigna al 
+//lugar correspondiente. 
 CharactersView.prototype._getViewFor = function (character) {
   var view = {};
-  // Usa la lista de características visibles y Object.defineProperty() para
-  // devolver un objeto de JavaScript con las características visibles pero
-  // no modificables.
+
   this._visibleFeatures.forEach( function (feature){
   Object.defineProperty(view, feature, {
     get: function () {
-      // ¿Cómo sería este getter para reflejar la propiedad del personaje?
+      // Toma el valor del feature correspondiente del personaje
       return character [feature];
     },
     set: function (value) {
-      // ¿Y este setter para ignorar cualquier acción?
+      // Asigna al espacio correspondiente la caracteristica que el personaje tenga. 
+      //Ejemplo, el nombre con el nombre que debería tener.
+      character[feature] = character[feature];
     },
     enumerable: true
   });
 });
-  // Acuérdate de devolver el objeto.
+  //Devolvemos el objeto 
   return view;
 };
 

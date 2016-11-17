@@ -88,19 +88,20 @@ Battle.prototype._extractCharactersById = function (parties) {
   }
 
   function useUniqueName(character) {
-    // Genera nombres únicos de acuerdo a las reglas
-    // de generación de identificadores que encontrarás en
-    // la descripción de la práctica o en la especificación.
-   
-   //El histogranma de nombres está en idCounters
+    //Asigna nombres únicos a cada uno de los pesonajes, según un histograma de nombres. 
+    //En caso de que haya dos personajes que se llamen igual, estos serán identificados por un número al lado de su nombre
+    //Siendo estos números únicos para cada entidad.
+   //El histogranma de nombres está en idCounters.
+
    if (!idCounters.hasOwnProperty(character.name)) {
       idCounters[character.name] = 1;
-      //console.log (character.name);
+      //console.log (character.name); //Herramienta para debugear el nombre de los personajes
       return (character.name);
     }
     else{
 
       idCounters[character.name]++;
+      //Herramienta para debugear un personaje cuyo nombre ya ha sido utilizado.
       //console.log (character.name + ' ' + (idCounters[character.name]));
       return (character.name + ' ' + (idCounters[character.name]));
     } 
@@ -138,7 +139,6 @@ Battle.prototype._nextTurn = function () {
       var turn = this._turns.next();
       this._showActions();
       this.emit('turn', turn);
-      //console.log (turn);
     }
   }.bind(this), 0);
 };
@@ -150,16 +150,16 @@ Battle.prototype._checkEndOfBattle = function () {
   return commonParty ? { winner: commonParty } : null;
 
   function isAlive(character) {
-    // Devuelve true si el personaje está vivo.
-    if (character.hp > 0) return true;
-    else return false;
-    //return (character.hp > 0);
+    // Devuelve true si el personaje está vivo, cuando tenga puntos de vida positivos.
+    return (character.hp > 0);
   }
 
   function getCommonParty(characters) {
-    // Devuelve la party que todos los personajes tienen en común o null en caso
-    // de que no haya común.
-    var partyToCheck = characters.party;
+    // Este método toma una party de inicio y comprueba si el resto de entidades comparten esa party.
+    //En caso afirmativo, esa party habrá ganado la batalla y será vencedora.
+    //Desde que encuentre una entidad de distinto bando, devolverá que el ganador es null.
+
+   /* var partyToCheck = characters.party;
     var i = 1;
     while (partyToCheck !== this.charactersById[i].party 
       && i<this.charactersById.length){
@@ -173,6 +173,8 @@ Battle.prototype._checkEndOfBattle = function () {
     else {
       return null;
     }
+  
+*/
   }
 };
 
@@ -190,17 +192,15 @@ Battle.prototype._onAction = function (action) {
     action: action,
     activeCharacterId: this._turns.activeCharacterId
   };
-
-  // Debe llamar al método para la acción correspondiente:
+  // LLama al método que corresponda según la action que le llegue al método:
   // defend -> _defend; attack -> _attack; cast -> _cast
-  //Dependiendo de lo que valga "action", devolverá la acción.
- if (action === 'attack')
+
+  if (action === 'attack')
     return _attack();
   else if (action === 'defense')
     return _defend();
   else if (action === 'cast')
     return _cast();
-
 };
 
 Battle.prototype._defend = function () {
@@ -211,21 +211,24 @@ Battle.prototype._defend = function () {
   this._executeAction();
 };
 
+//Mejora la defensa del personaje, cuando éste se defiende, aumentando
+//su defensa en un 10%.
 Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];
-  // Implementa la mejora de la defensa del personaje.
-  var expectedDefense = Math.ceil(this._charactersById[targetId]._defense * 1.1);
-  this._charactersById[targetId] = expectedDefense;
-  return expectedDefense;
+  var expectedDefense = this._charactersById[targerId]._defense;
+  this._charactersById[targetId]._defense = Math.ceil(expectedDefense * 1.1);
+  
+  return this._charactersById[targetId]._defense;
 };
-
+//Este método devuelve la defensa a sus valores iniciales, guardados en "states".
 Battle.prototype._restoreDefense = function (targetId) {
   // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
   // Puedes utilizar el atributo this._states[targetId] para llevar tracking
   // de las defensas originales.
-  return this._charactersById[targetId]._defense = states;
+  return this._charactersById[targetId]._defense = this._states[targetId];
 };
 
+//Este método transmite el ataque a el objetivo, informandole se que ha sido atacado.
 Battle.prototype._attack = function () {
   var self = this;
   self._showTargets(function onTarget(targetId) {
@@ -235,6 +238,8 @@ Battle.prototype._attack = function () {
   });
 };
 
+//Método que lanza un hechizo, restando los puntos de maná necesarios e informando
+//a un enemigo que ha sido dañado, o a un aliado que ha sido curado.
 Battle.prototype._cast = function () {
   var self = this;
   self._showScrolls(function onScroll(scrollId, scroll) {
@@ -274,3 +279,4 @@ Battle.prototype._showScrolls = function (onSelection) {
 };
 
 module.exports = Battle;
+

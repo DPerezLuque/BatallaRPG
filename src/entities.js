@@ -12,14 +12,16 @@ var lib = module.exports = {
   Effect: Effect,
   Character: Character,
 
+//Las armas de las que disponen tanto los héroes como los monstruos, así como el efecto que estas tienen.
+//El primer número es el daño que inflingen en un golpe acertado, y el segundo es el efecto extra
+//que determinadas armas poseen.
   weapons: {
-    get sword() {
+     get sword() {
       return new items.Weapon('sword', 25);
     },
-    get wand() {
+      get wand() {
       return new items.Weapon('wand', 5);
     },
-    // Implementa los colmillos y el pseudópodo
       get pseudopode() {
       return new items.Weapon('pseudopode', 5, new Effect ({mp : -5}));
     },
@@ -28,7 +30,10 @@ var lib = module.exports = {
     },
 
   },
-
+//Los distintos personajes que participan en esta batalla.
+//Poseen caracteristicas de salud, iniciativa y similares, así como el arma que poseen y como se llaman.
+//Los maxHP y maxMP están comentados porque a la hora de iniciarse, los hp y mp toman esos valores automáticamente.
+//Por lo que están ahí por pura referencia.
   characters: {
 
     get heroTank() {
@@ -43,7 +48,6 @@ var lib = module.exports = {
       });
     },
 
-    // Implementación del mago
      get heroWizard() {
       return new Character('Wizard', {
         initiative: 4,
@@ -66,7 +70,6 @@ var lib = module.exports = {
       });
     },
 
-    // Implementa el limo y el murciélago
      get monsterSlime() {
       return new Character('Slime', {
         initiative: 2,
@@ -89,13 +92,15 @@ var lib = module.exports = {
 
   },
 
+  //Pergaminos mágicos que se pueden utilizar a cambio de unos puntos de maná que se sustraen
+  //del ususario. Tienen varios efectos.
   scrolls: {
-
+    //Este hechizo cura a la unidad seleccionada 25 hp, a cambio de 10 puntos de maná
     get health() {
       return new items.Scroll('health', 10, new Effect({ hp: 25 }));
     },
 
-    // Implementa la bola de fuego
+    // Este hechizo inflinge daño, 25 puntos a la vida, a cambio de 30 puntos de maná
     get fireball() {
       return new items.Scroll('fireball', 30, new Effect({ hp: -25 }));
     },

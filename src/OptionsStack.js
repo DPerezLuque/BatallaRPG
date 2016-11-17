@@ -18,11 +18,13 @@ function OptionsStack() {
 
 OptionsStack.prototype.select = function (id) {
   // Redirige el comando al último de la pila.
+  //devuelve la selección actual que tiene.
   return this.current.select(id);
 };
 
 OptionsStack.prototype.list = function () {
   // Redirige el comando al último de la pila.
+  //devuelve la lista actual que tiene.
   return this.current.list();
 };
 

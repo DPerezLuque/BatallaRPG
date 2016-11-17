@@ -11,10 +11,8 @@ TurnList.prototype.reset = function (charactersById) {
   this.list = this._sortByInitiative(); 
 };
 
+//Define el siguiente turno que se va a realizar
 TurnList.prototype.next = function () {
-  // Haz que calcule el siguiente turno y devuelva el resultado
-  // según la especificación. Recuerda que debe saltar los personajes
-  // muertos.
   //Creamos un objeto contenedor de la persona que va a atacar después
   var turn = [];
 
@@ -23,10 +21,16 @@ TurnList.prototype.next = function () {
   //console.log (this.turnNumber); //Debug del turno
   turn.number = this.turnNumber;
 
+  //Iniciamos el index del turno a 0. Este index decide el orden en el que van a realizar acciones las entidades
+  //Asignamos el personaje de la lista que marque el index al active character,
+  //es decir lo iniciamos antes del bucle, tanto para this como para turn.
   this._turnIndex = 0;
   this.activeCharacterId = this.list[this._turnIndex];
   turn.activeCharacterId = this.activeCharacterId;
 
+//Este bucle recorre la lista e ignora los personajes que estén muertos,
+//y va modificando el personaje activo, y aumentando el indez hasta que sale del bucle.
+//devolviendo un personaje que no esté muerto.
   while (this._turnIndex < this.list.length  
     &&  this._charactersById[turn.activeCharacterId]._isDead){
       //console.log (this._charactersById[turn.activeCharacterId]._isDead);
@@ -38,13 +42,17 @@ TurnList.prototype.next = function () {
   //Rellenamos el objeto una vez sale del bucle
   turn.activeCharacterId = this.activeCharacterId;
   turn.party = this._charactersById[turn.activeCharacterId].party;
-  
-  //console.log (turn); //debug del turno
+  /*console.log ('---------------------------');
+  console.log (turn); //debug del turno
+  console.log ('00000000000000000000000000000');*/
 
+  //Devolvemos el objeto activo.
 return turn;
 
 };
 
+//Ordena los personajes según su iniciativa, creando dos arrays: uno, con el nombre y la iniciativa,
+//el otro con las iniciativas ordenadas, sin nombres
 TurnList.prototype._sortByInitiative = function () {
 
   var initiatives = []; //Los nombres de las personas, una vez se ordenen.

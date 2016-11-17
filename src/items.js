@@ -6,31 +6,32 @@ function Item(name, effect) {
   this.effect = effect;
 }
 
+//Le da las propiedades al arma. Nombre, el daño que causa y el efecto que hace
 function Weapon(name, damage, extraEffect) {
 
+//Puede tener un efecto normal que resta vida o con más efectos
   extraEffect = extraEffect || new Effect({});
   this.damage = damage;
   extraEffect.hp -= damage;
   Item.apply(this, [name, extraEffect]);
-
-  
-  // Haz que Weapon sea subtipo de Item haciendo que llame al constructor de
-  // de Item.
-  
 }
-// Termina de implementar la herencia haciendo que la propiedad prototype de
-// Item sea el prototipo de Weapon.prototype y recuerda ajustar el constructor.
+
+  //Llamamos al constructor de Item para que Weapon sea un subtipo de este
   Weapon.prototype = Object.create(Item.prototype);
   Weapon.prototype.constructor = Weapon;
 
+//Le da las propiedades de cada hechizo a cada pergamino. Nombre,
+//coste de puntos mágicos y el efecto que causa
 function Scroll(name, cost, effect) {
    Item.call(this, name, effect);
   this.cost = cost;
   effect = effect || new Effect ({});
+  //Revisa si se pude utilizar porque el personaje tenga suficintes puntos mágicos
   var canBeUsed = Scroll.prototype.canBeUsed ()
   if (canBeUsed) Item.apply(this, [name, effect]);
 }
 
+//Llamamos al constructor de Item para que el prototype de scroll sea el mismo
 Scroll.prototype = Object.create(Item.prototype);
 Scroll.prototype.constructor = Scroll;
 
@@ -44,12 +45,9 @@ Scroll.prototype.canBeUsed = function (mp) {
 };
 
 function Effect(variations) {
-  // Copia las propiedades que se encuentran en variations como propiedades de
-  // este objeto.
-  /*for (var name in variations){
-    this[name] = variations[name];
-  }
-*/
+
+//Cogemos cada propiedad del personaje y la igualamos al nuevo valor que venga dado
+//Sino llega nada se le pondrá el valor 0 por defecto
 this.initiative = variations.initiative || 0;
 this.defense = variations.defense || 0;
 this.hp = variations.hp || 0;
