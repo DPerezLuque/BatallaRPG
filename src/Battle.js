@@ -159,7 +159,20 @@ Battle.prototype._checkEndOfBattle = function () {
   function getCommonParty(characters) {
     // Devuelve la party que todos los personajes tienen en común o null en caso
     // de que no haya común.
-    for var persona in this._charactersById
+    var partyToCheck = characters.party;
+    var i = 1;
+    while (partyToCheck !== this.charactersById[i].party 
+      && i<this.charactersById.length){
+      i++;
+    }
+
+      
+    if (i === this.charactersById.length){
+     return partyToCheck;
+    }
+    else {
+      return null;
+    }
   }
 };
 
@@ -181,16 +194,12 @@ Battle.prototype._onAction = function (action) {
   // Debe llamar al método para la acción correspondiente:
   // defend -> _defend; attack -> _attack; cast -> _cast
   //Dependiendo de lo que valga "action", devolverá la acción.
- if (action === 'defend'){
-  return this._defend;
- }
- else if (action === 'attack'){
-return this._attack;
- }
-
- else if (action === 'cast'){
-return this._cast;
- }
+ if (action === 'attack')
+    return _attack();
+  else if (action === 'defense')
+    return _defend();
+  else if (action === 'cast')
+    return _cast();
 
 };
 
